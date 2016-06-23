@@ -18,7 +18,7 @@ void loadModules(QSplashScreen* psplash)
         psplash->showMessage("Loading modules: "
                              + QString::number(i) + "%",
                              Qt::AlignHCenter | Qt::AlignBottom,
-                             Qt::black
+                             Qt::white
         );
     }
 }
@@ -26,20 +26,21 @@ void loadModules(QSplashScreen* psplash)
 int main(int argc, char *argv[])
 {
     QApplication  app(argc, argv);
-    QPixmap pixmap("../src/temp.png");
+    QPixmap pixmap("/home/dev/temp/temp_text_viewer/text_viewer/src/temp.png");
 
     QSplashScreen *splash = new QSplashScreen(pixmap);
-    splash->show();
 
     QTextCodec *utfcodec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForTr(utfcodec);
 
     QTextCodec::setCodecForCStrings(utfcodec);
+
+    splash->show();
+    loadModules(splash);
+    splash->hide();
+
     MainWindow window;
     window.showMaximized();
-
-    loadModules(splash);
-
 
     return app.exec();
 }
